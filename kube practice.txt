@@ -1,0 +1,83 @@
+Create a Deployment and Scale It:
+
+Create a deployment named nginx-deploy using the nginx:alpine image in the default namespace.
+kubectl create deployment nginx-deploy --image=nginx:alpine
+Scale the deployment to 4 replicas.
+kubectl scale deployment nginx-deploy  --replicas=4
+
+
+Create a Pod and Expose It as a Service:
+
+Create a pod named mongo using the mongo:latest image in the default namespace.
+
+kubectl run mongo --image=mongo:latest
+Expose the mongo pod as a ClusterIP service named mongo-service, targeting port 27017.
+
+kubectl expose pod mongo  --type=ClusterIP  --name=mongo-service --port=27017 --target-port=27017
+
+
+Create a namespace called test-ns.
+kubectl create namespace test-ns
+Create a pod named busybox using the busybox image within the test-ns namespace.
+kubectl run busybox ---image=busybox -n=test-ns
+
+
+
+Create and Expose a Deployment in a Custom Namespace:
+
+Create a namespace called prod-ns.
+Create a deployment named httpd-deploy using the httpd:alpine image within the prod-ns namespace.
+Scale the deployment to 3 replicas.
+Expose the deployment as a NodePort service named httpd-service, targeting port 80 and exposing it on port 30080.
+
+
+1.kubectl create namespace prod-ns
+2.kubectl create deploymnet httd-deploy --image=httd:alpine -n prod-ns
+3.kubectl scale deployment httd-deploy --replicas=3 -n prod-ns
+4.kubectl expose deployment httpd-deploy --type=NodePort --name=httpd-service --port=80 --target-port=80 --node-port=30080 -n prod-ns
+
+
+
+
+
+Question 1: Create a Deployment and Scale It
+Task:
+
+Create a deployment named frontend using the nginx image in the default namespace.
+Scale the deployment to 5 replicas.
+
+kubectl create deployment frontend  --image=nginx
+kubectl scale deployment frontend --replicas=5
+
+Question 2: Create a Pod in a New Namespace and Expose It
+Task:
+
+Create a namespace called dev-env.
+kubectl create namespace dev-env
+Create a pod named database using the mysql image within the dev-env namespace.
+kubectl run database  --image=mysql -n dev-env
+Expose the database pod as a ClusterIP service named database-service, targeting port 3306.
+expose pod database  --type=ClusterIP  --name=database-service  --port=3306  --target-port=3306
+
+
+
+
+
+
+
+
+
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: new-app
+  namespace: newname
+spec:
+  containers:
+  - name: mysql-container
+    image: mysql:latest
+    env:
+    - name: nm
+      value: nm
